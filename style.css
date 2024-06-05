@@ -1,28 +1,71 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;
-}
+  box-sizing: border-box;
 
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+}
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #333;
+  max-width: 100%;
+  background-color: #322a1d;
   color: #fff;
   text-align: center;
-  padding: 10px;
+  padding: 10px 32px 10px;
+  margin: 0 auto;
 }
 
-nav {
-  text-align: center;
-  padding: 10px;
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0;
+  background-color: #322a1d;
+  color: white;
+  height: 20px;
+}
+.navbar a:hover {
+  color: white;
+  text-decoration: underline; /* Exempel på textdekoration vid hover */
+}
+.menu {
+  list-style: none;
+  margin: 0;
+  position: fixed;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  top: 70px;
+  left: -210px;
+  width: 150px;
+  background-color: #322a1d;
+  transition: left 0.3s ease-in-out;
 }
 
-nav a {
-  color: #fff;
+.menu li {
+  margin: 10px 15px;
+  text-align: left;
+}
+
+.menu li a {
+  color: white;
   text-decoration: none;
-  margin: 0 20px;
+}
+
+.menu.active {
+  left: 0px;
+}
+
+.menu-icon {
+  font-size: 30px;
+  cursor: pointer;
 }
 
 main {
@@ -31,18 +74,25 @@ main {
 }
 
 .button {
-  background-color: #555;
+  background-color: #322a1d;
   color: #fff;
   padding: 10px 20px;
-  border: none;
+  border-color: #322a1d;
   border-radius: 5px;
   cursor: pointer;
 }
-
+.button:hover {
+  background-color: #fff;
+  color: #322a1d;
+  border-color: #322a1d;
+  text-decoration: underline;
+}
 .container {
   display: flex;
   flex-direction: column;
-  width: 900px;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 .section {
@@ -51,11 +101,19 @@ main {
   margin: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
+  width: 100%;
+}
+.section img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  padding-right: 24;
 }
 
 .section1 {
   display: flex;
   align-items: center;
+  flex-direction: column;
   gap: 30px;
 }
 
@@ -65,19 +123,59 @@ main {
   border-radius: 10px;
 }
 
+.section1 img:hover {
+  opacity: 50%;
+}
+.section1 img {
+  width: 100%;
+}
+
 .section1 h2 {
   font-size: 2.5rem;
 }
 
-.catGrid {
+.Alpaca-Grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.image-wrapper {
+  position: relative;
   width: 100%;
 }
 
-.catGrid img {
+.image-wrapper img {
   width: 100%;
-  height: auto;
+  height: 800px; /* Fast höjd för alla bilder */
+  object-fit: cover;
+  border-radius: 10px; /* Valfritt för rundade hörn */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: 0.5s ease;
+  background-color: rgba(0, 0, 0, 0.5); /* Mörk överlagring */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  border-radius: 10px; /* Matcha med bildens hörn */
+}
+
+.image-wrapper:hover .overlay {
+  opacity: 1;
 }
 
 footer {
@@ -85,4 +183,35 @@ footer {
   color: #fff;
   text-align: center;
   padding: 10px;
+}
+
+@media (min-width: 768px) {
+  .menu-icon {
+    display: none;
+  }
+
+  .menu {
+    position: static;
+    flex-direction: row;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    transform: none;
+    transition: none;
+    opacity: 1;
+  }
+
+  .menu li {
+    margin: 0 15px;
+  }
+
+  .section1 {
+    flex-direction: row;
+  }
+
+  .Alpaca-Grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
